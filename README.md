@@ -1,0 +1,2 @@
+# SecureApi-JwtToken
+ This is step by step project to create Web API in .NET Core 6 and integration web API in Angular 12. We will secure Web API with JWT token-based Authentication. We will use microsoft identity to Manages users, passwords, profile data, roles, claims, tokens. Tools we will use :- ASP .NET Core 6, Entity Framework Core, Sql Server, Microsoft Identity for Authentication, Authorization & User Management, Angular 12.

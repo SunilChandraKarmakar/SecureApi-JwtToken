@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "w2v7nPsO7TjsYLwSkQzE9DsxDZV7xT7+dzy3Q+BJLAQ=",
+  "Source": "ClaimAuthorizationApi",
+  "BasePath": "_content/ClaimAuthorizationApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

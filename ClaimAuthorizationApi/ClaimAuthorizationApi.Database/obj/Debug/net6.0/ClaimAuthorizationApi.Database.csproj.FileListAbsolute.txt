@@ -1,0 +1,15 @@
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\bin\Debug\net6.0\ClaimAuthorizationApi.Database.deps.json
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\bin\Debug\net6.0\ClaimAuthorizationApi.Database.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\bin\Debug\net6.0\ClaimAuthorizationApi.Database.pdb
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\bin\Debug\net6.0\ClaimAuthorizationApi.Model.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\bin\Debug\net6.0\ClaimAuthorizationApi.Model.pdb
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.csproj.AssemblyReference.cache
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.GeneratedMSBuildEditorConfig.editorconfig
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.AssemblyInfoInputs.cache
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.AssemblyInfo.cs
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.csproj.CoreCompileInputs.cache
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.csproj.CopyComplete
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\refint\ClaimAuthorizationApi.Database.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ClaimAuthorizationApi.Database.pdb
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Database\obj\Debug\net6.0\ref\ClaimAuthorizationApi.Database.dll

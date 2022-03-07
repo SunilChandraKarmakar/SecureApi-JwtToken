@@ -67,3 +67,5 @@ D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\AutoMapper.dll
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll

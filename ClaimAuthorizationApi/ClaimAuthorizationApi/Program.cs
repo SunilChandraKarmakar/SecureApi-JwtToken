@@ -1,7 +1,9 @@
 using ClaimAuthorizationApi.DatabaseSetting;
 using ClaimAuthorizationApi.Model.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ClaimAuthorizationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+// Add JWT
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWTConfig"));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+{
+    byte[] key = System.Text.Encoding.ASCII.GetBytes(builder.Configuration["JWTConfig:Key"]);
+    string isSuer = builder.Configuration["JWTConfig:Issuer"];
+    string audience = builder.Configuration["JWTConfig:Audience"];
+
+    option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        RequireExpirationTime = true,
+        ValidIssuer =  isSuer,
+        ValidAudience = audience
+    };
 });
 
 builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<ClaimAuthorizationDbContext>();
@@ -29,6 +51,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

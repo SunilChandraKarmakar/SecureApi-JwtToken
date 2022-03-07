@@ -2,9 +2,15 @@
 using ClaimAuthorizationApi.Model.Models;
 using ClaimAuthorizationApi.Model.ViewModels.Login;
 using ClaimAuthorizationApi.Model.ViewModels.User;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,15 +23,19 @@ namespace ClaimAuthorizationApi.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
+        private readonly JwtConfig _jwtConfig;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper,
+                             IOptions<JwtConfig> jwtConfig)
         {
             _userManager = userManager;
             _signInManager = signInManager; 
-            _mapper = mapper;   
+            _mapper = mapper;
+            _jwtConfig = jwtConfig.Value;
         }
 
         // GET: api/<UserController>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("GetUsers")]
         public async Task<IEnumerable<UserViewModel>> GetUsers()
         {
@@ -42,7 +52,7 @@ namespace ClaimAuthorizationApi.Controllers
 
         // POST api/<UserController>
         [HttpPost("RegisterUser")]
-        public async Task<ActionResult<UpsertUserViewModel>> RegisterUser([FromBody] UpsertUserViewModel model)
+        public ActionResult<UpsertUserViewModel> RegisterUser([FromBody] UpsertUserViewModel model)
         {
             if(ModelState.IsValid)
             {
@@ -84,12 +94,40 @@ namespace ClaimAuthorizationApi.Controllers
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
 
                 if (result.Succeeded)
-                    return Ok(model);
+                {
+                    UserViewModel existUser = _mapper.Map<UserViewModel>(await _userManager.FindByEmailAsync(model.Email));
+                    existUser.Token = GenerateToken(existUser);
+                    return Ok(existUser);
+                }
 
                 return BadRequest("Email and Password can not match, try again.");
             }
 
             return BadRequest(ModelState);
+        }
+
+        private string GenerateToken(UserViewModel user)
+        {
+            JwtSecurityTokenHandler jwtTokenHendler = new JwtSecurityTokenHandler();
+            byte[] key = System.Text.Encoding.ASCII.GetBytes(_jwtConfig.Key);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new System.Security.Claims.ClaimsIdentity(new[]
+                {
+                    new System.Security.Claims.Claim(JwtRegisteredClaimNames.NameId, user.Id),
+                    new System.Security.Claims.Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new System.Security.Claims.Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                }),
+
+                Expires = DateTime.UtcNow.AddHours(12),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Issuer = _jwtConfig.Issuer,
+                Audience = _jwtConfig.Audience
+            };
+
+            var token = jwtTokenHendler.CreateToken(tokenDescriptor);
+            return jwtTokenHendler.WriteToken(token);
         }
     }
 }

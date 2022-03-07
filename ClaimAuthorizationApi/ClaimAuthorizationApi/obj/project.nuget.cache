@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "R48BAjCoPYjMh2uXfyfa20jjZcd6iLcPy66AEhLOSYeroI3Ame4/7wtI5FT/eoi1DkzZelm/qampVgqSjvJemQ==",
+  "dgSpecHash": "3lP470VCbZMxgPEOZDp2DF0DHXDcQfJPwdnkQ0rWjvuspdtMuTM5IZdaZ3AngCuh0Y8Ct/+y4RiHV4QdYzvzNA==",
   "success": true,
   "projectFilePath": "D:\\SecureApi-JwtToken\\ClaimAuthorizationApi\\ClaimAuthorizationApi\\ClaimAuthorizationApi.csproj",
   "expectedPackageFiles": [

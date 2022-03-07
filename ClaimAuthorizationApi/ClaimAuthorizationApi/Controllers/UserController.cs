@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using ClaimAuthorizationApi.Model.Models;
+using ClaimAuthorizationApi.Model.ViewModels.Login;
 using ClaimAuthorizationApi.Model.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,10 +26,11 @@ namespace ClaimAuthorizationApi.Controllers
         }
 
         // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("GetUsers")]
+        public async Task<IEnumerable<UserViewModel>> GetUsers()
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<UserViewModel> users = _mapper.Map<IEnumerable<UserViewModel>>(await _userManager.Users.ToListAsync());
+            return users;
         }
 
         // GET api/<UserController>/5
@@ -43,7 +46,7 @@ namespace ClaimAuthorizationApi.Controllers
         {
             if(ModelState.IsValid)
             {
-                ClaimAuthorizationApi.Model.Models.User user = _mapper.Map<User>(model);
+                User user = _mapper.Map<User>(model);
                 user.UserName = model.Email;
                 user.CreatedTime = DateTime.UtcNow;
                 user.LastModifiedTime = DateTime.UtcNow;
@@ -70,6 +73,23 @@ namespace ClaimAuthorizationApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        // POST api/<UserController>
+        [HttpPost("Login")]
+        public async Task<ActionResult<LoginViewModel>> Login([FromBody] LoginViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+                if (result.Succeeded)
+                    return Ok(model);
+
+                return BadRequest("Email and Password can not match, try again.");
+            }
+
+            return BadRequest(ModelState);
         }
     }
 }

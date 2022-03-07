@@ -10,6 +10,7 @@ namespace ClaimAuthorizationApi.AutomapperSetting
         {
             CreateMap<UpsertUserViewModel, User>();
             CreateMap<User, UpsertUserViewModel>();
+            CreateMap<User, UserViewModel>();
         }
     }
 }

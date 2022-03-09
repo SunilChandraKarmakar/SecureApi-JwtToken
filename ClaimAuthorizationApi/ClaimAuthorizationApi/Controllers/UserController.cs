@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -87,7 +86,7 @@ namespace ClaimAuthorizationApi.Controllers
 
         // POST api/<UserController>
         [HttpPost("Login")]
-        public async Task<ActionResult<LoginViewModel>> Login([FromBody] LoginViewModel model)
+        public async Task<ActionResult<UserViewModel>> Login([FromBody] LoginViewModel model)
         {
             if(ModelState.IsValid)
             {

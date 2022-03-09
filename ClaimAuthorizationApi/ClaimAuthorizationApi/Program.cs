@@ -33,6 +33,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+//Add CORS
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("AllowOrigin", policy =>
+    {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+});
+
 builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<ClaimAuthorizationDbContext>();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program));
@@ -55,6 +66,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors("AllowOrigin");
 
 app.MapControllers();
 

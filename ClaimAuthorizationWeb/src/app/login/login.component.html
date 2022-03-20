@@ -5,22 +5,22 @@
     <div class="col-md-6">
       <div class="card w-100">
         <div class="card-body">
-          <form method="post" autocomplete="off">
+          <form method="post" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
             <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+              <label for="email" class="col-sm-3 col-form-label">Email</label>
               <div class="col-sm-9">
-                <input type="email" class="form-control" id="inputEmail3">
+                <input type="email" class="form-control" id="email" formControlName="email">
               </div>
             </div>
             <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-3 col-form-label">Password</label>
+              <label for="password" class="col-sm-3 col-form-label">Password</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="inputPassword3">
+                <input type="password" class="form-control" id="password" formControlName="password">
               </div>
             </div>
             <div class="row justify-content-center">
               <div class="col-md-2">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
               </div>
             </div>
           </form>
@@ -29,3 +29,6 @@
     </div>
   </div>
 </div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+  <p style="color: white">Please Wait...</p>  
+</ngx-spinner> 

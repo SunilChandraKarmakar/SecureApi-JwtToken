@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ClaimAuthorizationApi.Model.Models;
+using ClaimAuthorizationApi.Model.ResponseModel;
 using ClaimAuthorizationApi.Model.ViewModels.Login;
 using ClaimAuthorizationApi.Model.ViewModels.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -64,12 +65,12 @@ namespace ClaimAuthorizationApi.Controllers
                 model = _mapper.Map<UpsertUserViewModel>(user);
 
                 if (result.Result.Succeeded)
-                    return Ok(model);
+                    return Ok(new ResponseStatusModel(ResponseCode.Ok, "User has been registered successfull.", model));
                 else
-                    return BadRequest(result.Result.Errors.Select(s=> s.Description).ToArray());
+                    return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User registration failed.", result.Result.Errors.Select(s => s.Description).ToArray()));
             }
 
-            return BadRequest(ModelState); 
+            return BadRequest(new ResponseStatusModel(ResponseCode.FormValidateError, "Regsitration form validate error.", ModelState)); 
         }
 
         // PUT api/<UserController>/5
@@ -96,13 +97,13 @@ namespace ClaimAuthorizationApi.Controllers
                 {
                     UserViewModel existUser = _mapper.Map<UserViewModel>(await _userManager.FindByEmailAsync(model.Email));
                     existUser.Token = GenerateToken(existUser);
-                    return Ok(existUser);
+                    return Ok(new ResponseStatusModel(ResponseCode.Ok, "Login successfull", existUser));
                 }
 
-                return BadRequest("Email and Password can not match, try again.");
+                return BadRequest(new ResponseStatusModel(ResponseCode.FormValidateError, "Email and Password can not match, try again.", null));
             }
 
-            return BadRequest(ModelState);
+            return BadRequest(new ResponseStatusModel(ResponseCode.FormValidateError, "Regsitration form validate error.", ModelState));
         }
 
         private string GenerateToken(UserViewModel user)

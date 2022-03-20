@@ -19,8 +19,13 @@ export class UserService {
   constructor(private _httpClient: HttpClient) { }
 
   getUsers(): Observable<UserViewModel[]> {
+    let userInfo = JSON.parse(localStorage.getItem('loginUserInfo'));
+    const asseccPermission = new HttpHeaders ({
+      'Authorization' : `Bearer ${userInfo.dataSet.token}`
+    });  
+
     const getAllUsersUrl: string = `${this.appBaseUrl}user/getUsers`;
-    return this._httpClient.get<UserViewModel[]>(getAllUsersUrl);
+    return this._httpClient.get<UserViewModel[]>(getAllUsersUrl, {headers: asseccPermission});
   }
 
   registerUser(model: UpsertUserViewModel): Observable<UpsertUserViewModel> {

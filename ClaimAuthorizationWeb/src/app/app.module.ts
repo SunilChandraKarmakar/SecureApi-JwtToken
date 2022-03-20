@@ -8,19 +8,28 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
     LoginComponent,
-    RegisterComponent
-  ],
+    RegisterComponent,
+    UserManagementComponent
+   ],
   
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgxSpinnerModule  
   ],
 
   providers: [],

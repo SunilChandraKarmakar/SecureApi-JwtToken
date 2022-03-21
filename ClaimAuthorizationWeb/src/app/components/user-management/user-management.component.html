@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <h5 class="text-center">User Management</h5>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>User Name</th>
+            <th>Sign Up Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of dataSource">
+            <td>{{user.fullName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.createdTime | date}}</td>
+            <td>
+              <button type="button" class="btn btn-outline-info btn-sm" routerLink="../user-managemet/edit/{{user.id}}">Edit</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" style="margin-left: 3px;" (click)="deleteUser(user.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+  <p style="color: white">Please Wait...</p>  
+</ngx-spinner> 

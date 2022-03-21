@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row mt-2 justify-content-center">
+    <h5 class="text-center">Edit User</h5>
+    <hr>
+    <div class="col-md-6">
+      <div class="card w-100">
+        <div class="card-body">
+          <form method="post" autocomplete="off">
+            <input type="hidden" name="id" [(ngModel)]="model.id">
+            <div class="row mb-3">
+              <label for="fullName" class="col-sm-3 col-form-label">Full Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="fullName" class="form-control" id="fullName" [(ngModel)]="model.fullName">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="userName" class="col-sm-3 col-form-label">User Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="userName" class="form-control" id="userName" [(ngModel)]="model.userName" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="email" class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="email" name="email" class="form-control" id="email" [(ngModel)]="model.email" readonly>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-outline-primary btn-sm" (click)="editUser()">Update</button>
+                <a class="btn btn-outline-secondary btn-sm" routerLink="/user-managemet" style="margin-left: 3px;">Back</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+  <p style="color: white">Please Wait...</p>  
+</ngx-spinner> 

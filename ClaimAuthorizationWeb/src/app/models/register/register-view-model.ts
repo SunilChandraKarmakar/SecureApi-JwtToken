@@ -1,4 +1,4 @@
-export class UpsertUserViewModel {
+export class RegisterViewModel {
     fullName: string;
     email: string;
     password: string;

@@ -2,8 +2,10 @@
 
 namespace ClaimAuthorizationApi.Model.ViewModels.User
 {
-    public class UpsertUserViewModel
+    public class UserEditViewModel
     {
+        public string Id { get; set; }
+
         [Required(ErrorMessage = "Please, provied full name.")]
         [StringLength(50, MinimumLength = 2)]
         public string FullName { get; set; }
@@ -13,8 +15,8 @@ namespace ClaimAuthorizationApi.Model.ViewModels.User
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Please, provied password.")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+        [Required(ErrorMessage = "Please, provied user name.")]
+        [StringLength(100, MinimumLength = 2)]
+        public string UserName { get; set; }
     }
 }

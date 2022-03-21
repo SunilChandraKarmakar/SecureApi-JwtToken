@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ResponseStatusModel } from '../models/response-model/response-status-model';
-import { UpsertUserViewModel } from '../models/user/upsert-user-view-model';
-import { UserService } from '../services/user.service';
+import { RegisterViewModel } from 'src/app/models/register/register-view-model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +15,8 @@ import { UserService } from '../services/user.service';
 
 export class RegisterComponent implements OnInit {
 
-  model: UpsertUserViewModel = new UpsertUserViewModel();
-  constructor(private _formBuilder: FormBuilder, private _userService: UserService, private _toastr: ToastrService) { }
+  model: RegisterViewModel = new RegisterViewModel();
+  constructor(private _formBuilder: FormBuilder, private _userService: UserService, private _toastr: ToastrService, private _spinnerService: NgxSpinnerService, private _router: Router) { }
 
   registerForm: FormGroup = this._formBuilder.group({
     fullName: ['', Validators.required],
@@ -42,11 +43,14 @@ export class RegisterComponent implements OnInit {
       return;
     }
     else {
+      this._spinnerService.show();
       this._userService.registerUser(this.model).subscribe((res) => {
+        this._spinnerService.hide();
         this._toastr.success('Register Successfull', 'Successfull');
-        return;
+        return this._router.navigate(['login']);
       },
       (error) => {
+        this._spinnerService.hide();
         this._toastr.error(error.error.dataSet, 'Error');
         return;
       });

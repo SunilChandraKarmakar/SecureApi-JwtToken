@@ -2,6 +2,7 @@
 using ClaimAuthorizationApi.Model.Models;
 using ClaimAuthorizationApi.Model.ResponseModel;
 using ClaimAuthorizationApi.Model.ViewModels.Login;
+using ClaimAuthorizationApi.Model.ViewModels.Register;
 using ClaimAuthorizationApi.Model.ViewModels.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -45,14 +46,22 @@ namespace ClaimAuthorizationApi.Controllers
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<UserEditViewModel>> Get(string id)
         {
-            return "value";
+            if (id == null || id == "")
+                return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User id can not found! Try again.", null));
+
+            UserEditViewModel existUser = _mapper.Map<UserEditViewModel>(await _userManager.FindByIdAsync(id));
+
+            if (existUser != null)
+                return Ok(existUser);
+
+            return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User can not found! Try again.", id));
         }
 
         // POST api/<UserController>
         [HttpPost("RegisterUser")]
-        public ActionResult<UpsertUserViewModel> RegisterUser([FromBody] UpsertUserViewModel model)
+        public ActionResult<UserEditViewModel> RegisterUser([FromBody] RegisterViewModel model)
         {
             if(ModelState.IsValid)
             {
@@ -62,7 +71,7 @@ namespace ClaimAuthorizationApi.Controllers
                 user.LastModifiedTime = DateTime.UtcNow;
 
                 Task<IdentityResult> result = _userManager.CreateAsync(user, model.Password);
-                model = _mapper.Map<UpsertUserViewModel>(user);
+                model = _mapper.Map<RegisterViewModel>(user);
 
                 if (result.Result.Succeeded)
                     return Ok(new ResponseStatusModel(ResponseCode.Ok, "User has been registered successfull.", model));
@@ -75,14 +84,48 @@ namespace ClaimAuthorizationApi.Controllers
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<UserEditViewModel>> Put(string id, [FromBody] UserEditViewModel model)
         {
+            if(ModelState.IsValid)
+            {
+                if(id == null || id == "")
+                    return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User id can not found! Try again.", null));
+
+                User existUser = await _userManager.FindByIdAsync(id);
+                existUser.FullName = model.FullName;
+                existUser.Email = model.Email;
+                existUser.UserName = model.UserName;
+
+                if(existUser == null)
+                    return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User can not found! Try again.", id));
+
+                IdentityResult result = await _userManager.UpdateAsync(existUser);
+                model = _mapper.Map<UserEditViewModel>(existUser);
+
+                if(result.Succeeded)
+                    return Ok(new ResponseStatusModel(ResponseCode.Ok, "User has been updated successfull.", model));
+
+                return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User can not updated! Try again.", null));
+            }
+
+            return BadRequest(new ResponseStatusModel(ResponseCode.FormValidateError, "User edit form validate error.", ModelState));
         }
 
         // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{id}")]       
+        public async Task<ActionResult<UserViewModel>> Delete(string id)
         {
+            if (id == null || id == "")
+                return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User id can not found! Try again.", null));
+
+            User existUser = await _userManager.FindByIdAsync(id);
+            IdentityResult result = await _userManager.DeleteAsync(existUser);
+            UserViewModel deletedUser = _mapper.Map<UserViewModel>(existUser);
+
+            if (result.Succeeded)
+                return Ok(new ResponseStatusModel(ResponseCode.Ok, "User has been deleted successfull", deletedUser));
+
+            return BadRequest(new ResponseStatusModel(ResponseCode.Error, "User can not deleted! Try again.", deletedUser));
         }
 
         // POST api/<UserController>

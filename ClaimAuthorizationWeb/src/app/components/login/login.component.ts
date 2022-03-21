@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { LoginViewModel } from '../models/login/login-view-model';
-import { UserService } from '../services/user.service';
+import { LoginViewModel } from '../../models/login/login-view-model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',

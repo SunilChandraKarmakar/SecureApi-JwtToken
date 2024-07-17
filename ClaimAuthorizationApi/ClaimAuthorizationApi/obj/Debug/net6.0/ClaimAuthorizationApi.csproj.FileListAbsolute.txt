@@ -69,3 +69,9 @@ D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\obj\Debug\net6.0\staticwebassets\msbuild.ClaimAuthorizationApi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\obj\Debug\net6.0\staticwebassets\msbuild.build.ClaimAuthorizationApi.props
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ClaimAuthorizationApi.props
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ClaimAuthorizationApi.props
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\obj\Debug\net6.0\staticwebassets.pack.json
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi\obj\Debug\net6.0\ClaimAuthorizationApi.sourcelink.json

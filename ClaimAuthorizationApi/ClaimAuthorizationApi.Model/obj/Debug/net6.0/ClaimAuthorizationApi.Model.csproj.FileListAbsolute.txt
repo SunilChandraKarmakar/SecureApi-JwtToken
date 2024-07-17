@@ -10,3 +10,4 @@ D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Model\obj\Debu
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Model\obj\Debug\net6.0\refint\ClaimAuthorizationApi.Model.dll
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Model\obj\Debug\net6.0\ClaimAuthorizationApi.Model.pdb
 D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Model\obj\Debug\net6.0\ref\ClaimAuthorizationApi.Model.dll
+D:\SecureApi-JwtToken\ClaimAuthorizationApi\ClaimAuthorizationApi.Model\obj\Debug\net6.0\ClaimAuthorizationApi.Model.sourcelink.json
